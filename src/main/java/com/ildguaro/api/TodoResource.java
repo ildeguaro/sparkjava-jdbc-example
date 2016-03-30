@@ -12,21 +12,22 @@ import spark.Route;
 
 public class TodoResource {
 	
-	public static void main(String[] args) {			
-		port(5000);		
-		get("/api/todos", new Route() {
-			public Object handle(Request req, Response resp) throws Exception {
-				resp.status(200);					   
-			   return new Gson().toJson(ToDoDAO.getAll());
-			}
-		});		
-		post("/api/todos/save", new Route() {
-			public Object handle(Request req, Response resp) throws Exception {
-				resp.status(200);
-				ToDoDAO.saveOne(new ToDo(0,req.queryParams("task"),true));	   
-			   return new Gson().toJson("Exito true");
-			}
-		});
+    public static void main(String[] args) {			
+        port(5000);		
+        get("/api/todos", new Route() {
+                public Object handle(Request req, Response resp) throws Exception {
+                        resp.status(200);					   
+                   return new Gson().toJson(ToDoDAO.getAll());
+                }
+        });		
+        post("/api/todos/save", new Route() {
+                public Object handle(Request req, Response resp) throws Exception {
+                        resp.status(200);
+                        String task = req.queryMap().get("task").value();                                
+                        ToDoDAO.saveOne(new ToDo(0,task,true));	   
+                   return new Gson().toJson("Exito true");
+                }
+        });
     }
 
 }
