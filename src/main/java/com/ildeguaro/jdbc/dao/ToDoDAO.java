@@ -77,7 +77,7 @@ public class ToDoDAO {
             con = MyConnect.getConnection();
             try {
                     stmt = con.createStatement();
-                    String sql = new String("insert into todo(task,done) values ("+task.getTask()+",0)");
+                    String sql = new String("insert into todo(task,done) values ('"+task.getTask()+"',0)");
                     retornar = stmt.executeUpdate(sql);
 
             } catch (SQLException e) {			

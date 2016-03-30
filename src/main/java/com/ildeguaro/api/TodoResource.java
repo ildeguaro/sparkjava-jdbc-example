@@ -1,10 +1,12 @@
-package com.ildguaro.api;
+package com.ildeguaro.api;
 import static spark.Spark.*;
 
 
 import com.google.gson.Gson;
 import com.ildeguaro.dominio.ToDo;
 import com.ildeguaro.jdbc.dao.ToDoDAO;
+import com.ildeguaro.util.UtilJson;
+import java.util.Map;
 
 import spark.Request;
 import spark.Response;
@@ -20,14 +22,18 @@ public class TodoResource {
                    return new Gson().toJson(ToDoDAO.getAll());
                 }
         });		
-        post("/api/todos/save", new Route() {
+        post("/api/todos/save","application/json", new Route() {
                 public Object handle(Request req, Response resp) throws Exception {
-                        resp.status(200);
-                        String task = req.queryMap().get("task").value();                                
+                        resp.status(200);                                              
+                        String task = UtilJson.mapFromBody(req).get("task");    
                         ToDoDAO.saveOne(new ToDo(0,task,true));	   
                    return new Gson().toJson("Exito true");
                 }
         });
     }
+    
+    
 
 }
+
+
