@@ -28,7 +28,7 @@ public class ToDo {
 	public void setTask(String task) {
 		this.task = task;
 	}
-	public boolean isDne() {
+	public boolean isDone() {
 		return done;
 	}
 	public void setDone(boolean done) {
