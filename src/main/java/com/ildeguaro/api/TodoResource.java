@@ -87,7 +87,7 @@ public class TodoResource {
         	}
         });
         
-        Spark.post("/api/todos/save","application/json",(req, resp) -> {
+        Spark.post("/api/todos","application/json",(req, resp) -> {
             resp.status(200);        
             ToDo todo = new ObjectMapper().readValue(req.body(), ToDo.class);
             ToDoDAO.saveOne(todo);	   
